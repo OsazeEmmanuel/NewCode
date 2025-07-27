@@ -1,0 +1,25 @@
+{% extends 'landing.html' %}
+
+{% block body %}
+    {% if current_user.is_authenticated %}
+    <form class="row g-3 justify-content-center" method="POST">
+      <div class="col-md-8">
+        <textarea class="form-control" rows="4" placeholder="Your Message" name="message" required></textarea>
+      </div>
+      <div class="col-8">
+        <button type="submit" class="btn btn-success btn-lg w-100">Send Message</button>
+      </div>
+    </form>
+    {% else %}
+<div class="row">
+    <div class="col-md-4 offset-4">
+        <div class="row g-5 justify-content-center">
+            <a class="btn btn-secondary" href="{{url_for('user_login')}}">Kindly login to book an appointment</a>
+        </div>
+    </div>
+
+</div>
+
+
+    {% endif %}
+{% endblock %}

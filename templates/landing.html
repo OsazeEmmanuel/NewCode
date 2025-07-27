@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pawfect Care | Veterinary Clinic</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+  <div class="container-fluid">
+    <!-- Brand logo -->
+    <a class="navbar-brand d-flex align-items-center" href="#">
+      <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Dog" width="30" height="30" class="me-2">
+      PawfectCare.ng
+    </a>
+
+    <!-- Navbar items -->
+    <div class="collapse navbar-collapse" id="navbarVet">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+
+        <li class="nav-item">
+          <a class="nav-link active" href="{{ url_for('landing_page')}}">Home</a>
+
+        </li>
+        {% if current_user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('doctor_profile', id=current_user.id)}}">Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('logout')}}">Logout</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('user_register')}}">Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('user_login')}}">Login</a>
+        </li>
+        {% endif %}
+        <li class="nav-item">
+          <a class="btn btn-success ms-lg-3 d-flex align-items-center" href="{{url_for('doctor_register')}}">
+            <i class="bi bi-telephone me-2"></i> Signup as a Vet Doctor
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-success ms-lg-3 d-flex align-items-center" href="{{url_for('contact')}}">
+            <i class="bi bi-telephone me-2"></i> Phone the Vet
+          </a>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+<section class="container mt-4">
+  <!-- Success Alert -->
+  <div class="alert alert-success fade show" role="alert">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+      <h4>{{message}}</h4>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+</section>
+<!-- Hero Section -->
+  {% block body %}
+<section class="bg-success bg-gradient text-white py-5">
+  <div class="container d-flex flex-column flex-md-row align-items-center">
+
+    <div class="col-md-6">
+      <h1 class="display-4 fw-bold">Caring for Your Pets, Always</h1>
+      <p class="lead">Welcome to Pawfect Care — your trusted partner in animal health and happiness.</p>
+      <a href="{{url_for('appointment')}}" class="btn btn-light btn-lg">Book an Appointment</a>
+    </div>
+    <div class="col-md-6 text-center mt-4 mt-md-0">
+      <img src="https://media.istockphoto.com/id/2184260648/photo/border-collie-with-owner-training-in-a-public-park.webp?a=1&b=1&s=612x612&w=0&k=20&c=iY21-MX7zc-z1xdhJJ7_U-KeQmyaIPfl82Zx9QIuVpI=" class="img-fluid rounded shadow" alt="Happy dog">
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section class="py-5 bg-light" id="services">
+  <div class="container text-center">
+    <h2 class="mb-4 fw-bold">Our Services</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card shadow h-100">
+          <div class="card-body">
+            <h5 class="card-title">Pet Checkups</h5>
+            <p class="card-text">Routine exams to keep your pet healthy and happy.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card shadow h-100">
+          <div class="card-body">
+            <h5 class="card-title">Vaccinations</h5>
+            <p class="card-text">Essential vaccines to protect against serious diseases.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card shadow h-100">
+          <div class="card-body">
+            <h5 class="card-title">Surgery</h5>
+            <p class="card-text">Safe and professional surgical care for pets in need.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="py-5">
+  <div class="container text-center">
+    <h2 class="mb-5 fw-bold">What Pet Parents Say</h2>
+    <blockquote class="blockquote">
+      <p>"The vets at Pawfect Care saved our little Bella. Forever grateful!"</p>
+      <footer class="blockquote-footer">Sarah D.</footer>
+    </blockquote>
+    <blockquote class="blockquote mt-4">
+      <p>"Professional and loving staff. My dog actually likes going to the vet now!"</p>
+      <footer class="blockquote-footer">James R.</footer>
+    </blockquote>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="bg-success-subtle py-5" id="contact">
+  <div class="container text-center">
+    <h2 class="mb-4 fw-bold">Contact Us</h2>
+    <p class="mb-4">Call us at <strong>(234) 700-VET-CARE</strong> or send us a message below:</p>
+
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-dark text-white text-center py-3">
+  &copy; 2025 Pawfect Care Veterinary Clinic. All rights reserved.
+</footer>
+{% endblock %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
